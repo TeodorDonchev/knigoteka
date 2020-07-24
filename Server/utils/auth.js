@@ -31,5 +31,4 @@ module.exports = (redirectAuthenticated = true) => {
                 next(err);
             })
     }
-
 };

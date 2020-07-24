@@ -4,4 +4,5 @@ const book = require('./book');
 module.exports = {
     user,
     book
+
 };

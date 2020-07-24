@@ -82,5 +82,4 @@ module.exports = {
             .catch(next)
     },
 
-
 };
