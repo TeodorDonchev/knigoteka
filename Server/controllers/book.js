@@ -2,7 +2,7 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Book.find()
+        models.Book.find().populate('publishedBy', 'username')
             .then((books) => res.send(books))
             .catch(next);
     },
@@ -38,7 +38,7 @@ module.exports = {
             genre,
             description,
             imageUrl } = req.body;
-        
+
         models.Book.updateOne({ _id: id }, { title, author, genre, description, imageUrl })
             .then((updatedBook) => res.send(updatedBook))
             .catch(next)
@@ -49,5 +49,14 @@ module.exports = {
         models.Book.deleteOne({ _id: id })
             .then((removedBook) => res.send(removedBook))
             .catch(next)
+    },
+
+    like: (req, res, next) => {
+        const id = req.params.id;
+        const { _id } = req.user;
+
+        models.Book.updateOne({ _id: id }, { $push: { likes: _id } })
+            .then((updatedBook) => res.send(updatedBook))
+            .catch(next);
     }
 };
