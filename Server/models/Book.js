@@ -30,6 +30,11 @@ const bookSchema = new Schema({
         required: true,
     },
 
+    likes: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+
     publishedBy: {
         type: ObjectId,
         ref: "User"
