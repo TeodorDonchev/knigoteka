@@ -1,0 +1,21 @@
+.navigation {
+    width: 100%;
+    height: 12vh;
+    background-color: #404040;
+    color: white;
+    position: fixed;
+    top: 0;
+    border-bottom: 3px solid #808080;
+}
+
+.nav-bar {
+    margin-top: -5.5%;
+    margin-left: 50%;
+}
+
+.logo {
+    width: 300px;
+    margin-right: 60%;
+}
+
+
