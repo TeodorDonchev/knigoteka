@@ -3,6 +3,7 @@ import Navigation from './components/navigation';
 import Book from './components/book';
 import PageTitle from './components/title';
 import About from './components/about';
+import Footer from './components/footer';
 import './App.css';
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
       Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
      
       Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others."/>
+
+      <Footer/>
     </div>
   );
 }
