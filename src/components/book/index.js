@@ -27,7 +27,6 @@ class Book extends Component {
         let {
             books
         } = this.state;
-        console.log(this.state.books);
 
         books.sort((a, b) => b.likes.length - a.likes.length);
 
