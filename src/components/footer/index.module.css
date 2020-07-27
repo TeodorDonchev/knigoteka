@@ -3,11 +3,13 @@
     height: 8vh;
     background-color: #404040;
     color: white;
-    margin-top: 5%;
     border-top: 3px solid #808080;
+    clear: both;
+    position: relative;
+    margin-top: -200px;
 }
 
 .footer div{
-    margin-top: 1%;
+    margin-top: 10px;
     text-align: center;
 }
