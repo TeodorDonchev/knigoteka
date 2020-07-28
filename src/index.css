@@ -1,16 +1,16 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap');
 * {
   margin: 0;
   padding: 0;
   font-family: 'Sora', sans-serif;
-} */
+}
 
-@import url('<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">');
+/* @import url('<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">');
 * {
   margin: 0;
   padding: 0;
   font-family: 'Dancing Script', cursive;
-} *
+} * */
 
 body{
   padding-top: 150px;
