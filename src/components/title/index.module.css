@@ -1,5 +1,6 @@
 .page-title {
-    margin-top: 10%;
+    padding-top: 3%;
     text-decoration: underline;
     text-align: center;
+    display: block;
 }

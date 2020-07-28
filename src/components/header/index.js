@@ -1,12 +1,15 @@
 import React from 'react';
 import LinkPath from '../link-path';
 import styles from './index.module.css';
-import logo from '../images/logo.png';
+import logo from '../images/logo-text.png';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
         <nav className={styles.navigation}>
-            <img className={styles.logo} src={logo} alt="logo"/>
+            <Link to="/">
+                <img className={styles.logo} src={logo} alt="logo" />
+            </Link>
             <div className={styles['nav-bar']}>
                 <LinkPath href="/" title="Home" />
                 <LinkPath href="/all-books" title="Books" />
