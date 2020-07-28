@@ -2,16 +2,12 @@
     display: inline-block;
     height: auto;
     margin-right: 5%;
-    cursor: pointer;
     padding: 3%;
     margin: 0.1%;
-    border-radius: 5% white;
-    vertical-align: right;
 }
 
-nav .nav-item:hover {
-    border-top: none;
-    border-bottom: 2px solid #808080;
+.nav-link:hover {
+    
     font-weight: bold;
 }
 

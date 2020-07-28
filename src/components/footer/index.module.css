@@ -6,7 +6,7 @@
     border-top: 3px solid #808080;
     clear: both;
     position: relative;
-    margin-top: -200px;
+    bottom: 0;
 }
 
 .footer div{
