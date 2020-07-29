@@ -10,7 +10,7 @@ function PageLayout(props) {
             <div classNmae={styles.container}>
                 {props.children}
             </div>
-            <Footer />
+            <Footer type={props.footer} />
         </div>
     );
 }

@@ -6,7 +6,7 @@ import PageLayout from '../../components/page-layout'
 
 function HomePage() {
   return (
-    <PageLayout>
+    <PageLayout footer="normal">
       <PageTitle text="Most Liked Books" />
       <Book page='home' />
       <PageTitle text="About" />
