@@ -1,6 +1,15 @@
 .page-title {
     padding-top: 3%;
-    text-decoration: underline;
     text-align: center;
     display: block;
+    color: grey;
+}
+
+.page-title:after {
+    content: ""; 
+    display: block; 
+    margin: 0 auto; 
+    width: 30%; 
+    padding-top: 20px; 
+    border-bottom: 1px solid grey; 
 }
