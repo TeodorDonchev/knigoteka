@@ -5,18 +5,17 @@ import InputField from '../../components/input-field';
 import MainButton from '../../components/main-button';
 import styles from './index.module.css';
 
-function RegisterPage() {
+function LoginPage() {
     return (
         <PageLayout footer="form">
-            <PageTitle text="Create your account" />
-            <div className={styles['register-form']}>
+            <PageTitle text="Login" />
+            <div className={styles['login-form']}>
                 <InputField type="text" name="username" placeholder="Username" />
                 <InputField type="password" name="password" placeholder="Password" />
-                <InputField type="password" name="rePassword" placeholder="Confirm Password" />
             </div>
-            <MainButton text="Sign Up"/>
+            <MainButton text="Login"/>
         </PageLayout>
     );
 }
 
-export default RegisterPage;
+export default LoginPage;

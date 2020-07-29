@@ -1,15 +1,20 @@
-.footer {
+.normal-footer, .form-footer {
     width: 100%;
     height: 8vh;
     background-color: #404040;
     color: white;
     border-top: 3px solid #808080;
-    clear: both;
+    overflow: hidden;
     position: relative;
+    clear: both;
     bottom: 0;
 }
 
-.footer div{
-    margin-top: 10px;
+.form-footer {
+    position: absolute;
+}
+
+.form-footer div, .normal-footer div{
+    margin-top: 20px;
     text-align: center;
 }

@@ -6,7 +6,7 @@ import SearchMenu from '../../components/search-menu';
 
 const AllBooksPage = () => {
     return (
-        <PageLayout>
+        <PageLayout footer="normal">
             <SearchMenu/>
             <PageTitle text="All Posted Books"/>
             <Book page="all"/>
