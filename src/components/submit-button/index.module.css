@@ -1,4 +1,4 @@
-.main-button{
+.submit-button{
     width: 125px;
     background-color: white;
     color: #404040;
@@ -13,7 +13,7 @@
     border-radius: 10px;
 }
 
-.main-button:hover{
+.submit-button:hover{
     background-color: #404040;
     color: white;
 }
