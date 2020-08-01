@@ -3,9 +3,12 @@ import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import InputField from '../../components/input-field';
 import SubmitButton from '../../components/submit-button';
+import UserContext from '../../Context';
 import styles from './index.module.css';
 
 class RegisterPage extends Component {
+    static contextType = UserContext;
+
     constructor(props) {
         super(props);
 
@@ -47,6 +50,12 @@ class RegisterPage extends Component {
             return response.json();
         }).then(result => {
             if (result.username) {
+                const user = {
+                    _id: result._id,
+                    username: result.username,
+                    books: result.books,
+                };
+                this.context.login(user);
                 this.props.history.push('/');
             }
         })
