@@ -6,7 +6,7 @@ const saltRounds = 10;
 
 module.exports = {
     get: (req, res, next) => {
-        models.User.find()
+        models.User.find().populate('books')
             .then((users) => res.send(users))
             .catch(next)
     },
@@ -25,7 +25,7 @@ module.exports = {
 
         login: (req, res, next) => {
             const { username, password } = req.body;
-            models.User.findOne({ username })
+            models.User.findOne({ username }).populate('books')
                 .then((user) => Promise.all([user, user.matchPassword(password)]))
                 .then(([user, match]) => {
                     if (!match) {
