@@ -9,13 +9,17 @@ import UserContext from '../../Context'
 class Header extends Component {
     static contextType = UserContext;
 
+    logout = () => {
+        this.context.logout();
+    }
+
     render() {
         const {
             logged,
             user
-          } = this.context;
-      
-          const links = getLinks(logged, user);
+        } = this.context;
+        
+        const links = getLinks(logged, user);
         return (
             <nav className={styles.navigation}>
                 <Link to="/">
@@ -24,13 +28,23 @@ class Header extends Component {
                 <div className={styles['nav-bar']}>
                     {
                         links.map(link => {
+                            if (link.title === 'Logout') {
+                                return (
+                                    <LinkPath
+                                    key={link.title}
+                                    href={link.href}
+                                    title={link.title}
+                                    onClick={this.logout}
+                                />
+                                )
+                            }
                             return (
-                            <LinkPath
-                                key={link.title}
-                                href={link.href}
-                                title={link.title}
-                            />
-                            )
+                                <LinkPath
+                                    key={link.title}
+                                    href={link.href}
+                                    title={link.title}
+                                />
+                            );
                         })
                     }
                 </div>

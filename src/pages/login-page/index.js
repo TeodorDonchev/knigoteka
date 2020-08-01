@@ -44,7 +44,7 @@ class LoginPage extends Component {
         }).then(response => {
             const token = response.headers.get('x-auth-token');
             if (token) {
-                
+
             }
             document.cookie = `x-auth-token=${token}`;
             return response.json();

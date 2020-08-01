@@ -10,7 +10,6 @@ class HomePage extends Component {
 
 
   render() {
-   
     return (
       <PageLayout footer="normal">
         <PageTitle text="Most Liked Books" />
