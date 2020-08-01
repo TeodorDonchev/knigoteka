@@ -7,7 +7,7 @@ function PageLayout(props) {
     return (
         <div className={styles.app}>
             <Header />
-            <div classNmae={styles.container}>
+            <div className={styles.container}>
                 {props.children}
             </div>
             <Footer type={props.footer} />

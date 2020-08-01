@@ -15,7 +15,11 @@ module.exports = {
         register: (req, res, next) => {
             const { username, password } = req.body;
             models.User.create({ username, password })
-                .then((createdUser) => res.send(createdUser))
+                .then((createdUser) => {
+
+                    const token = utils.jwt.createToken({ id: createdUser._id });
+                    res.header(config.authCookieName, token).send(createdUser);
+                })
                 .catch(next)
         },
 
@@ -30,7 +34,7 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id });
-                    res.cookie(config.authCookieName, token).send(user);
+                    res.header(config.authCookieName, token).send(user);
                 })
                 .catch(next);
         },
@@ -54,9 +58,9 @@ module.exports = {
 
 
         if (password) {
-             password = await new Promise((resolve, reject) => {
+            password = await new Promise((resolve, reject) => {
                 bcrypt.genSalt(saltRounds, (err, salt) => {
-                    if(err){
+                    if (err) {
                         reject(err)
                     }
                     bcrypt.hash(password, salt, (err, hash) => {
@@ -66,7 +70,7 @@ module.exports = {
                         resolve(hash);
                     });
                 });
-               
+
             });
         }
 
