@@ -22,6 +22,36 @@ class RegisterPage extends Component {
         this.setState(newState);    
     }
 
+    onSubmit = (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state;
+
+        fetch('http://localhost:9999/api/user/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            const token = response.headers.get('x-auth-token');
+            if (token) {
+                
+            }
+            document.cookie = `x-auth-token=${token}`;
+            return response.json();
+        }).then(result => {
+            if (result.username) {
+                this.props.history.push('/');
+            }
+        })
+    }
+
     render() {
         const {
             username,
@@ -32,7 +62,7 @@ class RegisterPage extends Component {
         return (
             <PageLayout footer="form">
                 <PageTitle text="Create your account" />
-                <form className={styles['register-form']}>
+                <form className={styles['register-form']} onSubmit={this.onSubmit}>
                     <InputField
                         type="text"
                         name="username"

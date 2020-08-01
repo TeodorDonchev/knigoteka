@@ -16,10 +16,40 @@ class LoginPage extends Component {
         };
     }
 
-    onChange(e, type) {
+    onChange = (e, type) => {
         const newState = {};
         newState[type] = e.target.value;
         this.setState(newState);
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state;
+
+        fetch('http://localhost:9999/api/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            const token = response.headers.get('x-auth-token');
+            if (token) {
+                
+            }
+            document.cookie = `x-auth-token=${token}`;
+            return response.json();
+        }).then(result => {
+            if (result.username) {
+                this.props.history.push('/');
+            }
+        })
     }
 
     render() {
@@ -31,7 +61,7 @@ class LoginPage extends Component {
         return (
             <PageLayout footer="form">
                 <PageTitle text="Login" />
-                <form className={styles['login-form']}>
+                <form className={styles['login-form']} onSubmit={this.onSubmit}>
                     <InputField
                         type="text"
                         name="username"
