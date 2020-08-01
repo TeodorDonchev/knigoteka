@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserContext from './Context';
+import getCookie from './utils/cookie-parser';
 
 
 class Auth extends Component {
@@ -7,7 +8,7 @@ class Auth extends Component {
         super(props);
 
         this.state = {
-            logged: false,
+            logged: null,
             user: null
         };
     }
@@ -20,10 +21,38 @@ class Auth extends Component {
     }
 
     logout = () => {
+        document.cookie = 'x-auth-token= ;  expires = Thu, 01 Jan 1970 00:00:00 GMT';
         this.setState({
             logged: false,
             user: null
         });
+    }
+
+    componentDidMount() {
+        const token = getCookie('x-auth-token');
+
+        if (!token) {
+            this.logout();
+            return;
+        }
+
+        fetch('http://localhost:9999/api/user/verify', {
+            method: 'POST',
+            body: JSON.stringify({
+                token
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            if (result.status){
+                this.login(result.user);
+            } else {
+                this.logout();
+            }
+        })
     }
 
     render() {
