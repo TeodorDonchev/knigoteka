@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PageLayout from '../../components/page-layout';
+import PageTitle from '../../components/title';
 import UserContext from '../../Context';
 import Book from '../../components/book';
 import styles from './index.module.css';
@@ -25,6 +26,27 @@ class ProfilePage extends Component {
         });
     }
 
+    AnyBooks = () => {
+        if (this.state.books.length > 0) {
+            return (
+                <div>
+                    <h2>All Books Posted by You</h2>
+                    <div className={styles[`book-container`]}>
+                        {this.state.books.map(book => {
+                            return (
+                                <Book key={book._id} page="all" {...book} />
+                            );
+                        })}
+                    </div>
+                </div>
+            );
+        }
+
+        return (
+            <h2>You have not posted any books yet.</h2>
+        );
+    }
+
     componentDidMount() {
         this.getUser();
     }
@@ -37,24 +59,19 @@ class ProfilePage extends Component {
 
         const booksLength = books.length;
         const likes = books.map(book => book.likes.length).reduce((a, b) => a + b, 0);
+        const footerType = books.length > 0 ? 'normal' : 'form';
 
-        console.log('state ', this.state);
         return (
-            <PageLayout footer="normal">
+            <PageLayout footer={footerType}>
+                <PageTitle text="Profile" />
                 <div className={styles.card}>
                     <h1>{username}</h1>
                     <p className={styles.title}>Books Posted: {booksLength}</p>
                     <p className={styles.title}>Likes Aquired: {likes}</p>
-                    <h2>All Books Posted by You</h2>
-                    <div className={styles[`book-container`]}>
-                        {books.map(book => {
-                            return (
-                                <Book key={book._id} page="all" {...book} />
-                            );
-                        })}
-                    </div>
-                    <p><button className={styles['card-button']}>Change Profile Information</button></p>
+                    <p><button className={styles['card-button']}>Change username</button></p>
+                    <p><button className={styles['card-button']}>Change password</button></p>
                 </div>
+                <this.AnyBooks />
 
             </PageLayout >
         )

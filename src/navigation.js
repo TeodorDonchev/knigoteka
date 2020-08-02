@@ -8,6 +8,7 @@ import RegisterPage from './pages/register-page/';
 import LoginPage from './pages/login-page';
 import UserContext from './Context';
 import ProfilePage from './pages/profile-page';
+import PostBookPage from './pages/post-book-page';
 
 class Navigation extends Component {
     static contextType = UserContext;
@@ -21,6 +22,7 @@ class Navigation extends Component {
                     <Route path="/register" component={RegisterPage} />
                     <Route path="/login" component={LoginPage} />
                     <Route path="/profile/:id" component={ProfilePage} />
+                    <Route path="/post-book" component={PostBookPage} />
                 </Switch>
             </BrowserRouter>
         );

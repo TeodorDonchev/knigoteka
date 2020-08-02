@@ -13,7 +13,8 @@ module.exports = {
             author,
             genre,
             description,
-            imageUrl } = req.body;
+            imageUrl
+         } = req.body;
 
         const { _id } = req.user;
 

@@ -42,9 +42,10 @@ class LoginPage extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            const token = response.headers.get('x-auth-token');
+            const token = response.headers.get('auth');
+            console.log('response', response)
             if (token) {
-
+                //validation
             }
             document.cookie = `x-auth-token=${token}`;
             return response.json();
