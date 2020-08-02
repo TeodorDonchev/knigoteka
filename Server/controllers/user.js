@@ -30,7 +30,7 @@ module.exports = {
         },
 
         verifyLogin: (req, res, next) => {
-            const token = req.body.token || '';
+            const token = req.headers.auth || '';
             
             Promise.all([
                 utils.jwt.verifyToken(token),
@@ -71,7 +71,7 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id });
-                    res.header(config.authCookieName, token).send(user);
+                    res.header('auth', token).send(user);
                 })
                 .catch(next);
         },

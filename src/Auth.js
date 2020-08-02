@@ -38,11 +38,9 @@ class Auth extends Component {
 
         fetch('http://localhost:9999/api/user/verify', {
             method: 'POST',
-            body: JSON.stringify({
-                token
-            }),
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Auth': token
             }
         }).then(response => {
             return response.json();
