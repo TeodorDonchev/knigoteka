@@ -19,10 +19,10 @@ class RegisterPage extends Component {
         }
     }
 
-    onChange(e, type){
+    onChange(e, type) {
         const newState = {};
         newState[type] = e.target.value;
-        this.setState(newState);    
+        this.setState(newState);
     }
 
     onSubmit = (e) => {
@@ -44,7 +44,7 @@ class RegisterPage extends Component {
         }).then(response => {
             const token = response.headers.get('x-auth-token');
             if (token) {
-                
+
             }
             document.cookie = `x-auth-token=${token}`;
             return response.json();
@@ -70,30 +70,42 @@ class RegisterPage extends Component {
 
         return (
             <PageLayout footer="form">
-                <PageTitle text="Create your account" />
                 <form className={styles['register-form']} onSubmit={this.onSubmit}>
-                    <InputField
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={(e) => this.onChange(e, 'username')}
-                    />
-                    <InputField
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={(e) => this.onChange(e, 'password')}
-                    />
-                    <InputField
-                        type="password"
-                        name="rePassword"
-                        value={confirmPassword}
-                        placeholder="Confirm Password"
-                        onChange={(e) => this.onChange(e, 'confirmPassword')}
-                    />
-                    <SubmitButton text="Sign Up" />
+                    <PageTitle text="Create your account" />
+                    <div className={styles['input-field']}>
+                        <InputField
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Username"
+                            onChange={(e) => this.onChange(e, 'username')}
+                        />
+                    </div>
+
+                    <div className={styles['input-field']}>
+                        <InputField
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => this.onChange(e, 'password')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+                    <div className={styles['input-field']}>
+                        <InputField
+                            type="password"
+                            name="rePassword"
+                            value={confirmPassword}
+                            placeholder="Confirm Password"
+                            onChange={(e) => this.onChange(e, 'confirmPassword')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+
+                    <div className={styles.submit}>
+                        <SubmitButton text="Sign Up"/>
+                    </div>
                 </form>
             </PageLayout>
         );

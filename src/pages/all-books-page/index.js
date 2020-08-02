@@ -1,5 +1,5 @@
 import React from 'react';
-import Book from '../../components/book';
+import Books from '../../components/books';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import SearchMenu from '../../components/search-menu';
@@ -9,7 +9,7 @@ const AllBooksPage = () => {
         <PageLayout footer="normal">
             <SearchMenu/>
             <PageTitle text="All Posted Books"/>
-            <Book page="all"/>
+            <Books page="all"/>
         </PageLayout>
     );
 }

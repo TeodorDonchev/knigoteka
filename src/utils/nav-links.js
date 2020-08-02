@@ -19,7 +19,7 @@ const getLinks = (logged, user) => {
         },
         {
             title: 'Logout',
-            href: `/`
+            href: '/'
         },
         
     ];

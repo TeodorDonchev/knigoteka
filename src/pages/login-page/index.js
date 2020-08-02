@@ -69,23 +69,31 @@ class LoginPage extends Component {
 
         return (
             <PageLayout footer="form">
-                <PageTitle text="Login" />
                 <form className={styles['login-form']} onSubmit={this.onSubmit}>
-                    <InputField
-                        type="text"
-                        name="username"
-                        value={username}
-                        placeholder="Username"
-                        onChange={(e) => this.onChange(e, 'username')}
-                    />
-                    <InputField
-                        type="password"
-                        name="password"
-                        value={password}
-                        placeholder="Password"
-                        onChange={(e) => this.onChange(e, 'password')}
-                    />
-                    <SubmitButton text="Login" />
+                    <PageTitle text="Login" />
+                    <div className={styles['input-field']}>
+                        <InputField
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Username"
+                            onChange={(e) => this.onChange(e, 'username')}
+                        />
+                    </div>
+
+                    <div className={styles['input-field']}>
+                        <InputField
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => this.onChange(e, 'password')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+                    <div className={styles.submit}>
+                        <SubmitButton text="Login"/>
+                    </div>
                 </form>
             </PageLayout>
         );
