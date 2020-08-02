@@ -6,8 +6,14 @@ const saltRounds = 10;
 
 module.exports = {
     get: (req, res, next) => {
-        models.User.find().populate('books')
-            .then((users) => res.send(users))
+        models.User.findById(req.query.id).populate('books')
+            .then((result) => {
+                const user = {
+                    username: result.username,
+                    books: result.books
+                }
+                res.send(user)
+            })
             .catch(next)
     },
 
@@ -33,7 +39,7 @@ module.exports = {
                 .then(([data, blacklistToken]) => {
                     if (blacklistToken) { return Promise.reject(new Error('blacklisted token')) }
 
-                    models.User.findById(data.id)
+                    models.User.findById(data.id).populate('books')
                         .then((user) => {
                             return res.send({
                                 status: true,
@@ -42,8 +48,6 @@ module.exports = {
                         });
                 })
                 .catch(err => {
-                    console.log(err);
-                    if (!redirectAuthenticated) { next(); return; }
 
                     if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
                         res.status(401).send('UNAUTHORIZED!');

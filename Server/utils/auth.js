@@ -21,6 +21,8 @@ module.exports = (redirectAuthenticated = true) => {
                     });
             })
             .catch(err => {
+                
+                console.log(err.message);
                 if (!redirectAuthenticated) { next(); return; }
 
                 if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {

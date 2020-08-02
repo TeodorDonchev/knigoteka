@@ -47,8 +47,13 @@ class Auth extends Component {
         }).then(response => {
             return response.json();
         }).then(result => {
-            if (result.status){
-                this.login(result.user);
+            if (result.status) {
+                const user = {
+                    _id: result.user._id,
+                    username: result.user.username,
+                    books: result.user.books,
+                };
+                this.login(user);
             } else {
                 this.logout();
             }
