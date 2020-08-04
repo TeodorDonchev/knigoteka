@@ -1,0 +1,31 @@
+.book-container {
+    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    height: 455px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%; 
+    
+    display: flex;
+  }
+
+.data-container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-container{
+      text-align: left;
+ }
+  
+.book-cover{
+      height: 455px;
+      width: 300px;
+      margin-left: 0px;
+}
+
+.likes {
+      color: grey;
+      font-size: 18px;
+}

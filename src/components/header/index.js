@@ -18,7 +18,7 @@ class Header extends Component {
             logged,
             user
         } = this.context;
-        
+
         const links = getLinks(logged, user);
         return (
             <nav className={styles.navigation}>
@@ -31,11 +31,11 @@ class Header extends Component {
                             if (link.title === 'Logout') {
                                 return (
                                     <LinkPath
-                                    key={link.title}
-                                    href={link.href}
-                                    title={link.title}
-                                    onClick={this.logout}
-                                />
+                                        key={link.title}
+                                        href={link.href}
+                                        title={link.title}
+                                        onClick={this.logout}
+                                    />
                                 )
                             }
                             return (

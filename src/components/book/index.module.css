@@ -29,19 +29,21 @@
       color: grey;
       font-size: 18px;
   }
-    
-  .home-book button, .all-book button {
-      border: none;
-      outline: 0;
-      padding: 12px;
-      color: white;
-      background-color: #404040;
-      text-align: center;
-      cursor: pointer;
-      width: 100%;
-      font-size: 18px;
+
+  .detailsBtn {
+    border: none;
+    outline: 0;
+    padding: 10px;
+    color: white;
+    background-color: #404040;
+    text-align: center;
+    cursor: pointer;
   }
-    
-  .home-book button:hover, .all-book button:hover{
-      opacity: 0.7;
+  .detailsBtnText {
+    color:white;
+    font-size: 18px;
+  }
+
+  .detailsBtn:hover {
+    opacity: 0.7;
   }
