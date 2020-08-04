@@ -2,8 +2,16 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Book.find().populate('publishedBy', 'username')
+        models.Book.find()
             .then((books) => res.send(books))
+            .catch(next);
+    },
+
+    getOne: (req, res, next) => {
+        models.Book.findById(req.query.id).populate('publishedBy', 'username').populate('likes', 'username')
+            .then((book) => {
+                res.send(book)
+            })
             .catch(next);
     },
 
@@ -14,7 +22,7 @@ module.exports = {
             genre,
             description,
             imageUrl
-         } = req.body;
+        } = req.body;
 
         const { _id } = req.user;
 
