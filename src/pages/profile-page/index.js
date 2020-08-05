@@ -4,6 +4,7 @@ import PageTitle from '../../components/title';
 import UserContext from '../../Context';
 import Book from '../../components/book';
 import styles from './index.module.css';
+import NoBooksMsg from '../../components/no-books-msg';
 
 class ProfilePage extends Component {
     static contextType = UserContext;
@@ -27,23 +28,23 @@ class ProfilePage extends Component {
     }
 
     AnyBooks = () => {
-        if (this.state.books.length > 0) {
+        if (this.state.books.length === 0) {
             return (
-                <div>
-                    <h2>All Books Posted by You</h2>
-                    <div className={styles[`book-container`]}>
-                        {this.state.books.map(book => {
-                            return (
-                                <Book key={book._id} page="all" {...book} />
-                            );
-                        })}
-                    </div>
-                </div>
+                <NoBooksMsg text="There are no posted books by you. You can post now :)"/>
             );
         }
-
+        
         return (
-            <h2>You have not posted any books yet.</h2>
+            <div>
+                <h2>All Books Posted by You</h2>
+                <div className={styles[`book-container`]}>
+                    {this.state.books.map(book => {
+                        return (
+                            <Book key={book._id} page="all" {...book} />
+                        );
+                    })}
+                </div>
+            </div>
         );
     }
 

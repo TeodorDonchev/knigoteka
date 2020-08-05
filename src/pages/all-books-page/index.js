@@ -1,17 +1,71 @@
-import React from 'react';
-import Books from '../../components/books';
+import React, { Component } from 'react';
+import Book from '../../components/book';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import SearchMenu from '../../components/search-menu';
+import styles from './index.module.css';
+import NoBooksMsg from '../../components/no-books-msg';
 
-const AllBooksPage = () => {
-    return (
-        <PageLayout footer="normal">
-            <SearchMenu/>
-            <PageTitle text="All Posted Books"/>
-            <Books page="all"/>
-        </PageLayout>
-    );
+class AllBooksPage extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            books: []
+        }
+    }
+
+    getBooks = async () => {
+        const response = await fetch('http://localhost:9999/api/book');
+        const books = await response.json();
+        this.setState({
+            books
+        });
+    }
+
+    renderBooks() {
+        let {
+            books
+        } = this.state;
+
+        books.sort((a, b) => b.likes.length - a.likes.length);
+
+        if (books.length === 0) {
+            return (
+                <NoBooksMsg/>
+            );
+        }
+
+        return (
+            <div className={styles[`book-container`]}>
+                {books.map(book => {
+                    return (
+                        <Book key={book._id} page="all" {...book} />
+                    );
+                })}
+            </div>
+        );
+    }
+
+    componentDidMount() {
+        this.getBooks();
+    }
+
+    render() {
+        let {
+            books
+        } = this.state;
+
+        const footerType = books.length > 0 ? 'normal' : 'form';
+
+        return (
+            <PageLayout footer={footerType}>
+                <SearchMenu />
+                <PageTitle text="All Posted Books" />
+                {this.renderBooks()}
+            </PageLayout>
+        );
+    }
 }
 
 export default AllBooksPage;
