@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import InputField from '../../components/input-field';
-import SubmitButton from '../../components/submit-button';
+import Button from '../../components/button';
 import UserContext from '../../Context';
 import styles from './index.module.css';
 
@@ -104,7 +104,7 @@ class RegisterPage extends Component {
                     </div>
 
                     <div className={styles.submit}>
-                        <SubmitButton text="Sign Up"/>
+                        <Button text="Sign Up" type="submit"/>
                     </div>
                 </form>
             </PageLayout>
