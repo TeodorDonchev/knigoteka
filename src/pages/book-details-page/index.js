@@ -2,8 +2,13 @@ import React, { Component } from 'react';
 import PageLayout from '../../components/page-layout';
 import styles from './index.module.css';
 import PageTitle from '../../components/title';
+import Button from '../../components/button';
+import UserContext from '../../Context';
+import getCookie from '../../utils/cookie-parser';
 
 class BookDetailsPage extends Component {
+    static contextType = UserContext;
+
     constructor(props) {
         super(props);
 
@@ -27,9 +32,107 @@ class BookDetailsPage extends Component {
         });
     }
 
+    renderLikes() {
+        const {
+            likes
+        } = this.state;
+
+        if (likes.length === 0) {
+            return (
+                <p className={styles.likes}>no one yet.</p>
+            )
+        }
+
+        let moreLikes = '';
+
+        if (likes.length > 1) {
+            moreLikes = ` and ${likes.length - 1} more.`;
+        }
+
+        return (
+            likes.reverse().slice(0, 1).map((like) => {
+                return (
+                    <p key={like._id} className={styles.likes}>{like.username}{moreLikes}</p>
+                );
+            })
+        );
+    }
+
+    like = () => {
+        const id = this.props.match.params.id;;
+        fetch(`http://localhost:9999/api/book/like/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Auth': getCookie('x-auth-token')
+            }
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            if (result) {
+                this.setState({
+                    likes: result.likes
+                })
+            }
+        })
+    }
+
+    edit = () => {
+
+    }
+
+    delete = () => {
+
+    }
+
+    renderButtons() {
+        const {
+            publishedBy,
+            likes
+        } = this.state;
+
+        if (this.context.logged) {
+            const {
+                username
+            } = this.context.user;
+
+            if (publishedBy.username !== username) {
+                let likedAlready = false;
+
+                likes.map(like => {
+                    if (like.username === username) {
+                        likedAlready = true;
+                    }
+                })
+
+                if (likedAlready) {
+                    return (
+                        <div className={styles.field}>You liked this book.</div>
+                    );
+                }
+
+                return (
+                    <div className={styles.field}>
+                        <Button text="Like" onClick={this.like} type="detail" />
+                    </div>
+                );
+            }
+            return (
+                <div className={styles.field}>
+                    <Button text="Edit" onClick={this.edit} type="detail" />
+                    <Button text="Delete" onClick={this.delete} type="detail" />
+                </div>
+            );
+
+        }
+
+
+    }
+
     componentDidMount() {
         this.getBook();
     }
+
 
     render() {
         const {
@@ -38,27 +141,27 @@ class BookDetailsPage extends Component {
             genre,
             description,
             imageUrl,
-            publishedBy,
-            likes,
+            publishedBy
         } = this.state;
 
         return (
             <PageLayout footer="form">
-                <PageTitle text="Book Details"/>
+                <PageTitle text="Book Details" />
                 < div className={styles[`book-container`]} >
 
                     <div className={styles['img-container']}>
                         <img className={styles[`book-cover`]} src={imageUrl} alt="Book" />
                     </div>
 
-                        <div className={styles['data-container']}>
-                            <h1>{title}</h1>
-                            <p className={styles.likes}>Likes: {likes.length}</p>
-                            <div>Author: {author}</div>
-                            <div>Genre: {genre}</div>
-                            <div>Posted By: {publishedBy.username}</div>
-                            <div>{publishedBy.username}'s opinion: {description}</div>
-                        </div>
+                    <div className={styles['data-container']}>
+                        <h1>{title}</h1>
+                        <p className={styles.likes}>Liked by: {this.renderLikes()}</p>
+                        <div className={styles.field}>Genre: {genre}</div>
+                        <div className={styles.field}>Author: {author}</div>
+                        <div className={styles.field}>Posted By: {publishedBy.username}</div>
+                        <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
+                        <div className={styles.opinion}>{publishedBy.username}'s opinion: {description}</div>
+                    </div>
                 </div >
             </PageLayout>
         )

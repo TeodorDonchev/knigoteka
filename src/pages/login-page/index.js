@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import InputField from '../../components/input-field';
-import SubmitButton from '../../components/submit-button';
+import Button from '../../components/button';
 import styles from './index.module.css';
 import UserContext from '../../Context';
 
@@ -93,7 +93,7 @@ class LoginPage extends Component {
                         />
                     </div>
                     <div className={styles.submit}>
-                        <SubmitButton text="Login"/>
+                        <Button text="Login" type="submit"/>
                     </div>
                 </form>
             </PageLayout>

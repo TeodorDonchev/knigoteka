@@ -71,7 +71,7 @@ class ProfilePage extends Component {
                     <p><button className={styles['card-button']}>Change username</button></p>
                     <p><button className={styles['card-button']}>Change password</button></p>
                 </div>
-                <this.AnyBooks />
+                {this.AnyBooks()}
 
             </PageLayout >
         )

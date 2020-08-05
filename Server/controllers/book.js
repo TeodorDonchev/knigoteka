@@ -64,8 +64,10 @@ module.exports = {
         const id = req.params.id;
         const { _id } = req.user;
 
-        models.Book.updateOne({ _id: id }, { $push: { likes: _id } })
-            .then((updatedBook) => res.send(updatedBook))
+        models.Book.findByIdAndUpdate({ _id: id }, { $push: { likes: _id } }, { new: true, useFindAndModify: false }).populate('likes', 'username')
+            .then((updatedBook) => {
+                res.send(updatedBook)
+            })
             .catch(next);
     }
 };
