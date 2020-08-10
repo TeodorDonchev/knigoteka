@@ -3,6 +3,7 @@ import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import InputField from '../../components/input-field';
 import Button from '../../components/button';
+import AlertMsg from '../../components/alert-msg';
 import styles from './index.module.css';
 import UserContext from '../../Context';
 
@@ -15,8 +16,33 @@ class LoginPage extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            errors: []
         };
+    }
+
+    validate() {
+        const {
+            username,
+            password
+        } = this.state;
+
+        const errors = [];
+
+        if (username.length === 0) {
+            errors.push('No username provided');
+        }
+
+        if (password.length === 0) {
+            errors.push('No password provided');
+        }
+
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return true;
+        }
+
+        return false;
     }
 
     onChange = (e, type) => {
@@ -32,6 +58,13 @@ class LoginPage extends Component {
             password
         } = this.state;
 
+        const hasErrors = this.validate();
+        console.log(hasErrors);
+
+        if (hasErrors) {
+            return
+        }
+
         fetch('http://localhost:9999/api/user/login', {
             method: 'POST',
             body: JSON.stringify({
@@ -43,11 +76,13 @@ class LoginPage extends Component {
             }
         }).then(response => {
             const token = response.headers.get('auth');
-            console.log('response', response)
             if (token) {
-                //validation
+                document.cookie = `x-auth-token=${token}`;
+            } else {
+                this.setState({
+                    errors: ['Unauthorized']
+                })
             }
-            document.cookie = `x-auth-token=${token}`;
             return response.json();
         }).then(result => {
             if (result.username) {
@@ -65,7 +100,8 @@ class LoginPage extends Component {
     render() {
         const {
             username,
-            password
+            password,
+            errors
         } = this.state;
 
         return (
@@ -92,8 +128,13 @@ class LoginPage extends Component {
                             className={styles['input-field']}
                         />
                     </div>
+
+                    {errors.map(error => (
+                        <AlertMsg key={error} text={error} type="error" />
+                    ))}
+
                     <div className={styles.submit}>
-                        <Button text="Login" type="submit"/>
+                        <Button text="Login" type="submit" />
                     </div>
                 </form>
             </PageLayout>
