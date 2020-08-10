@@ -4,7 +4,7 @@ import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import SearchMenu from '../../components/search-menu';
 import styles from './index.module.css';
-import NoBooksMsg from '../../components/no-books-msg';
+import AlertMsg from '../../components/alert-msg';
 
 class AllBooksPage extends Component {
     constructor(props) {
@@ -32,7 +32,7 @@ class AllBooksPage extends Component {
 
         if (books.length === 0) {
             return (
-                <NoBooksMsg/>
+                <AlertMsg text="Sorry, there aren't any posted books at the moment" type="no-data"/>
             );
         }
 

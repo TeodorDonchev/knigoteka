@@ -26,7 +26,13 @@ module.exports = {
                     const token = utils.jwt.createToken({ id: createdUser._id });
                     res.header(config.authCookieName, token).send(createdUser);
                 })
-                .catch(next)
+                .catch((e) => {
+                    if(e.code === 11000){
+                        res.send({
+                            error: 'This username is already taken'
+                        });
+                    }
+                })
         },
 
         verifyLogin: (req, res, next) => {
