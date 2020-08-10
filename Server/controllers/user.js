@@ -27,7 +27,7 @@ module.exports = {
                     res.header(config.authCookieName, token).send(createdUser);
                 })
                 .catch((e) => {
-                    if(e.code === 11000){
+                    if (e.code === 11000) {
                         res.send({
                             error: 'This username is already taken'
                         });
@@ -37,7 +37,7 @@ module.exports = {
 
         verifyLogin: (req, res, next) => {
             const token = req.headers.auth || '';
-            
+
             Promise.all([
                 utils.jwt.verifyToken(token),
                 models.TokenBlacklist.findOne({ token })

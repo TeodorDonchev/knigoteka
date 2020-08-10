@@ -30,7 +30,7 @@ class ProfilePage extends Component {
     AnyBooks = () => {
         if (this.state.books.length === 0) {
             return (
-                <AlertMsg text="There aren\'t any posted books by you. You can do post now :)" type="no-data"/>
+                <AlertMsg text="There aren't any posted books by you. You can do post now :)" type="no-data"/>
             );
         }
         
