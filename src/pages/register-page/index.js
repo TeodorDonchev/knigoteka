@@ -5,6 +5,7 @@ import InputField from '../../components/input-field';
 import Button from '../../components/button';
 import UserContext from '../../Context';
 import styles from './index.module.css';
+import AlertMsg from '../../components/alert-msg';
 
 class RegisterPage extends Component {
     static contextType = UserContext;
@@ -16,7 +17,35 @@ class RegisterPage extends Component {
             username: '',
             password: '',
             confirmPassword: '',
+            errors: []
         }
+    }
+
+    validate() {
+        const {
+            username,
+            password,
+            confirmPassword
+        } = this.state;
+
+        const errors = [];
+
+        if (username.length < 3) {
+            errors.push('Username must be atleast 3 charecters');
+        }
+        if (password.length < 6) {
+            errors.push('Password must be atleast 6 characters');
+        }
+        if (password !== confirmPassword) {
+            errors.push('Passwords don\'t match');
+        }
+
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return true;
+        }
+
+        return false;
     }
 
     onChange(e, type) {
@@ -32,6 +61,12 @@ class RegisterPage extends Component {
             password
         } = this.state;
 
+        const hasErrors = this.validate();
+
+        if (hasErrors) {
+            return;
+        }
+
         fetch('http://localhost:9999/api/user/register', {
             method: 'POST',
             body: JSON.stringify({
@@ -44,11 +79,18 @@ class RegisterPage extends Component {
         }).then(response => {
             const token = response.headers.get('x-auth-token');
             if (token) {
-
+                document.cookie = `x-auth-token=${token}`;
             }
-            document.cookie = `x-auth-token=${token}`;
             return response.json();
         }).then(result => {
+
+            if (result.error) {
+                this.setState({
+                    errors: [result.error]
+                });
+                return
+            }
+
             if (result.username) {
                 const user = {
                     _id: result._id,
@@ -65,7 +107,8 @@ class RegisterPage extends Component {
         const {
             username,
             password,
-            confirmPassword
+            confirmPassword,
+            errors
         } = this.state;
 
         return (
@@ -102,9 +145,11 @@ class RegisterPage extends Component {
                             className={styles['input-field']}
                         />
                     </div>
-
+                    {errors.map(error => (
+                        <AlertMsg key={error} text={error} type="error" />
+                    ))}
                     <div className={styles.submit}>
-                        <Button text="Sign Up" type="submit"/>
+                        <Button text="Sign Up" type="submit" />
                     </div>
                 </form>
             </PageLayout>

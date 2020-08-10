@@ -4,7 +4,7 @@ import PageTitle from '../../components/title';
 import UserContext from '../../Context';
 import Book from '../../components/book';
 import styles from './index.module.css';
-import NoBooksMsg from '../../components/no-books-msg';
+import AlertMsg from '../../components/alert-msg';
 
 class ProfilePage extends Component {
     static contextType = UserContext;
@@ -30,7 +30,7 @@ class ProfilePage extends Component {
     AnyBooks = () => {
         if (this.state.books.length === 0) {
             return (
-                <NoBooksMsg text="There are no posted books by you. You can post now :)"/>
+                <AlertMsg text="There aren\'t any posted books by you. You can do post now :)" type="no-data"/>
             );
         }
         

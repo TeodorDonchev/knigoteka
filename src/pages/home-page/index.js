@@ -4,7 +4,7 @@ import PageTitle from '../../components/title';
 import About from '../../components/about';
 import PageLayout from '../../components/page-layout'
 import UserContext from '../../Context'
-import NoBooksMsg from '../../components/no-books-msg';
+import AlertMsg from '../../components/alert-msg';
 
 class HomePage extends Component {
   static contextType = UserContext;
@@ -34,7 +34,7 @@ class HomePage extends Component {
 
     if (books.length === 0) {
       return (
-        <NoBooksMsg />
+        <AlertMsg text="Sorry, there aren't any posted books at the moment" type="no-data"/>
       );
     }
 
