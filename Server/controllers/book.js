@@ -20,13 +20,13 @@ module.exports = {
             title,
             author,
             genre,
-            description,
+            opinion,
             imageUrl
         } = req.body;
 
         const { _id } = req.user;
 
-        models.Book.create({ title, author, genre, description, imageUrl, publishedBy: _id })
+        models.Book.create({ title, author, genre, opinion, imageUrl, publishedBy: _id })
             .then((createdBook) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { $push: { books: createdBook } }),

@@ -17,9 +17,37 @@ class PostBookPage extends Component {
             title: '',
             author: '',
             genre: '',
-            description: '',
+            opinion: '',
             imageUrl: '',
         }
+    }
+
+    validate() {
+        const {
+            title,
+            author,
+            genre,
+            opinion
+        } = this.state;
+
+        const errors = [];
+
+        // if (username.length < 3) {
+        //     errors.push('Username must be atleast 3 charecters');
+        // }
+        // if (password.length < 6) {
+        //     errors.push('Password must be atleast 6 characters');
+        // }
+        // if (password !== confirmPassword) {
+        //     errors.push('Passwords don\'t match');
+        // }
+
+        // if (errors.length > 0) {
+        //     this.setState({ errors });
+        //     return true;
+        // }
+
+        return false;
     }
 
     onChange = (e, type) => {
@@ -34,7 +62,7 @@ class PostBookPage extends Component {
             title,
             author,
             genre,
-            description,
+            opinion,
             imageUrl
         } = this.state;
 
@@ -44,7 +72,7 @@ class PostBookPage extends Component {
                 title,
                 author,
                 genre,
-                description,
+                opinion,
                 imageUrl
             }),
             headers: {
@@ -67,7 +95,7 @@ class PostBookPage extends Component {
             title,
             author,
             genre,
-            description,
+            opinion,
             imageUrl
         } = this.state;
         return (
@@ -105,12 +133,12 @@ class PostBookPage extends Component {
                     </div>
 
                     <div className={styles['input-field']}>
-                        <InputField
-                            type="text"
-                            name="description"
-                            value={description}
-                            placeholder="Description"
-                            onChange={(e) => this.onChange(e, 'description')}
+                        <textarea
+                            name="opinion"
+                            placeholder="Your opinion on the book..."
+                            value={opinion}
+                            onChange={(e) => this.onChange(e, 'opinion')}
+                            className={styles.opinion}
                         />
                     </div>
 
