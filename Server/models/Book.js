@@ -20,7 +20,7 @@ const bookSchema = new Schema({
         required: true,
     },
     
-    description: {
+    opinion: {
         type: String,
         required: true,
     },

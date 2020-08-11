@@ -16,7 +16,7 @@ class BookDetailsPage extends Component {
             title: '',
             author: '',
             genre: '',
-            description: '',
+            opinion: '',
             imageUrl: '',
             publishedBy: '',
             likes: []
@@ -139,7 +139,7 @@ class BookDetailsPage extends Component {
             title,
             author,
             genre,
-            description,
+            opinion,
             imageUrl,
             publishedBy
         } = this.state;
@@ -160,7 +160,8 @@ class BookDetailsPage extends Component {
                         <div className={styles.field}>Author: {author}</div>
                         <div className={styles.field}>Posted By: {publishedBy.username}</div>
                         <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
-                        <div className={styles.opinion}>{publishedBy.username}'s opinion: {description}</div>
+                        <div className={styles.field}>{publishedBy.username}'s opinion on the book:</div>
+                        <textarea className={styles.opinion} value={opinion} readOnly />
                     </div>
                 </div >
             </PageLayout>
