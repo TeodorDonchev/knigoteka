@@ -2,6 +2,17 @@
  margin-bottom: 5%;
  text-align: center;
 }
+input[type="file"] {
+  display: none;
+}
+
+.cover-upload{
+  padding: 6px 12px;
+  border: 1px solid #404040;
+  border-radius: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
 
 .input-field {
   display: inline-block;

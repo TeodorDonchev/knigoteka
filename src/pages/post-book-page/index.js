@@ -19,18 +19,20 @@ class PostBookPage extends Component {
             genre: '',
             opinion: '',
             imageUrl: '',
+            loading: false,
+            uploaded: false
         }
     }
 
     validate() {
-        const {
-            title,
-            author,
-            genre,
-            opinion
-        } = this.state;
+        // const {
+        //     title,
+        //     author,
+        //     genre,
+        //     opinion
+        // } = this.state;
 
-        const errors = [];
+        // const errors = [];
 
         // if (username.length < 3) {
         //     errors.push('Username must be atleast 3 charecters');
@@ -54,6 +56,32 @@ class PostBookPage extends Component {
         const newState = {};
         newState[type] = e.target.value;
         this.setState(newState);
+    }
+
+    imageUpload = async (e) => {
+        const files = e.target.files;
+        const data = new FormData();
+        data.append('file', files[0]);
+        data.append('upload_preset', 'knigoteka');
+
+        this.setState({
+            loading: true
+        });
+
+        const res = await fetch('https://api.cloudinary.com/v1_1/teodor/image/upload', {
+            method: 'POST',
+            body: data
+        });
+
+        const file = await res.json();
+
+        if (file) {
+            this.setState({
+                imageUrl: file.secure_url,
+                loading: false,
+                uploaded: true
+            });
+        }
     }
 
     onSubmit = (e) => {
@@ -90,18 +118,52 @@ class PostBookPage extends Component {
         })
     }
 
+    renderUpload() {
+        const {
+            loading,
+            uploaded,
+            imageUrl
+        } = this.state;
+
+        if (uploaded) {
+            return (
+                <div className={styles.message}>Cover uploaded.</div>
+            )
+        }
+
+        if (loading) {
+            return (
+                <div className={styles.message}>Uploading cover...</div>
+            )
+        }
+
+        return (
+            <div className={styles['input-field']}>
+                <InputField
+                    type="file"
+                    name="imageUrl"
+                    value={imageUrl}
+                    placeholder="Upload Cover"
+                    onChange={this.imageUpload}
+                />
+            </div>
+        )
+    }
+
     render() {
         const {
             title,
             author,
             genre,
-            opinion,
-            imageUrl
+            opinion
         } = this.state;
         return (
             <PageLayout footer="form">
                 <form className={styles['book-form']} onSubmit={this.onSubmit}>
-                <PageTitle text="Post Book" />
+                    <PageTitle text="Post Book" />
+                    
+                    {this.renderUpload()}
+
                     <div className={styles['input-field']}>
                         <InputField
                             type="text"
@@ -132,6 +194,7 @@ class PostBookPage extends Component {
                         />
                     </div>
 
+
                     <div className={styles['input-field']}>
                         <textarea
                             name="opinion"
@@ -142,18 +205,9 @@ class PostBookPage extends Component {
                         />
                     </div>
 
-                    <div className={styles['input-field']}>
-                        <InputField
-                            type="text"
-                            name="imageUrl"
-                            value={imageUrl}
-                            placeholder="Image url"
-                            onChange={(e) => this.onChange(e, 'imageUrl')}
-                        />
-                    </div>
 
                     <div className={styles.submit}>
-                        <Button text="Post" type="submit"/>
+                        <Button text="Post" type="submit" />
                     </div>
 
                 </form >
