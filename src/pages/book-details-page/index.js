@@ -23,6 +23,26 @@ class BookDetailsPage extends Component {
         }
     }
 
+    likedOrNot = () => {
+        const {
+            likes
+        } = this.state;
+
+        const {
+            username
+        } = this.context.user;
+
+        let likedAlready = false;
+        
+        likes.forEach(like => {
+            if (like.username === username) {
+                likedAlready = true;
+            }
+        })
+        
+        return likedAlready;
+    }
+
     getBook = async () => {
         const id = this.props.match.params.id;
         const response = await fetch(`http://localhost:9999/api/book/details/?id=${id}`);
@@ -87,8 +107,7 @@ class BookDetailsPage extends Component {
 
     renderButtons() {
         const {
-            publishedBy,
-            likes
+            publishedBy
         } = this.state;
 
         if (this.context.logged) {
@@ -97,28 +116,23 @@ class BookDetailsPage extends Component {
             } = this.context.user;
 
             if (publishedBy.username !== username) {
-                let likedAlready = false;
 
-                likes.map(like => {
-                    if (like.username === username) {
-                        likedAlready = true;
-                    }
-                })
+                const likedAlready = this.likedOrNot();
 
                 if (likedAlready) {
                     return (
-                        <div className={styles.field}>You liked this book.</div>
+                        <div className={styles.liked}>You liked this book.</div>
                     );
                 }
 
                 return (
-                    <div className={styles.field}>
+                    <div className={styles['button-container']}>
                         <Button text="Like" onClick={this.like} type="detail" />
                     </div>
                 );
             }
             return (
-                <div className={styles.field}>
+                <div className={styles['button-container']}>
                     <Button text="Edit" onClick={this.edit} type="detail" />
                     <Button text="Delete" onClick={this.delete} type="detail" />
                 </div>
@@ -156,11 +170,11 @@ class BookDetailsPage extends Component {
                     <div className={styles['data-container']}>
                         <h1>{title}</h1>
                         <p className={styles.likes}>Liked by: {this.renderLikes()}</p>
+                        <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
+                        <div className={styles.field}>Posted By: {publishedBy.username}</div>
                         <div className={styles.field}>Genre: {genre}</div>
                         <div className={styles.field}>Author: {author}</div>
-                        <div className={styles.field}>Posted By: {publishedBy.username}</div>
-                        <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
-                        <div className={styles.field}>{publishedBy.username}'s opinion on the book:</div>
+                        <div className={styles['opinion-title']}>{publishedBy.username}'s opinion on the book:</div>
                         <textarea className={styles.opinion} value={opinion} readOnly />
                     </div>
                 </div >
