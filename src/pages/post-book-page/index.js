@@ -7,6 +7,7 @@ import AlertMsg from '../../components/alert-msg';
 import styles from './index.module.css';
 import UserContext from '../../Context';
 import getCookie from '../../utils/cookie-parser';
+import validateBook from '../../utils/book-validator';
 
 class PostBookPage extends Component {
     static contextType = UserContext;
@@ -24,46 +25,6 @@ class PostBookPage extends Component {
             uploaded: false,
             errors: []
         }
-    }
-
-    validate() {
-        const {
-            title,
-            author,
-            genre,
-            opinion,
-            imageUrl
-        } = this.state;
-
-        const errors = [];
-        
-        if (imageUrl.length < 1) {
-            errors.push('You must upload cover.');
-        }
-        
-        if (title.length < 1) {
-            errors.push('Title cannnot be empty.');
-        }
-
-        if (author.length < 1) {
-            errors.push('Author cannot be empty.');
-        }
-
-        if (genre.length < 1) {
-            errors.push('Genre cannot be empty.');
-        }
-
-        if (opinion.length < 1) {
-            errors.push('Opinion cannot be empty.');
-        }
-
-
-        if (errors.length > 0) {
-            this.setState({ errors });
-            return true;
-        }
-
-        return false;
     }
 
     onChange = (e, type) => {
@@ -108,9 +69,9 @@ class PostBookPage extends Component {
             imageUrl
         } = this.state;
 
-        const hasErrors = this.validate();
-
-        if (hasErrors) {
+        const bookErrors = validateBook(title, author, genre, opinion, imageUrl);
+        if (bookErrors.length > 0) {
+            this.setState({errors:  bookErrors});
             return;
         }
 
