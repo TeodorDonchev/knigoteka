@@ -3,6 +3,7 @@ import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import InputField from '../../components/input-field';
 import Button from '../../components/button';
+import AlertMsg from '../../components/alert-msg';
 import styles from './index.module.css';
 import UserContext from '../../Context';
 import getCookie from '../../utils/cookie-parser';
@@ -20,34 +21,47 @@ class PostBookPage extends Component {
             opinion: '',
             imageUrl: '',
             loading: false,
-            uploaded: false
+            uploaded: false,
+            errors: []
         }
     }
 
     validate() {
-        // const {
-        //     title,
-        //     author,
-        //     genre,
-        //     opinion
-        // } = this.state;
+        const {
+            title,
+            author,
+            genre,
+            opinion,
+            imageUrl
+        } = this.state;
 
-        // const errors = [];
+        const errors = [];
+        
+        if (imageUrl.length < 1) {
+            errors.push('You must upload cover.');
+        }
+        
+        if (title.length < 1) {
+            errors.push('Title cannnot be empty.');
+        }
 
-        // if (username.length < 3) {
-        //     errors.push('Username must be atleast 3 charecters');
-        // }
-        // if (password.length < 6) {
-        //     errors.push('Password must be atleast 6 characters');
-        // }
-        // if (password !== confirmPassword) {
-        //     errors.push('Passwords don\'t match');
-        // }
+        if (author.length < 1) {
+            errors.push('Author cannot be empty.');
+        }
 
-        // if (errors.length > 0) {
-        //     this.setState({ errors });
-        //     return true;
-        // }
+        if (genre.length < 1) {
+            errors.push('Genre cannot be empty.');
+        }
+
+        if (opinion.length < 1) {
+            errors.push('Opinion cannot be empty.');
+        }
+
+
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return true;
+        }
 
         return false;
     }
@@ -93,6 +107,12 @@ class PostBookPage extends Component {
             opinion,
             imageUrl
         } = this.state;
+
+        const hasErrors = this.validate();
+
+        if (hasErrors) {
+            return;
+        }
 
         fetch('http://localhost:9999/api/book', {
             method: 'POST',
@@ -155,13 +175,14 @@ class PostBookPage extends Component {
             title,
             author,
             genre,
-            opinion
+            opinion,
+            errors
         } = this.state;
         return (
             <PageLayout footer="form">
                 <form className={styles['book-form']} onSubmit={this.onSubmit}>
                     <PageTitle text="Post Book" />
-                    
+
                     {this.renderUpload()}
 
                     <div className={styles['input-field']}>
@@ -205,6 +226,9 @@ class PostBookPage extends Component {
                         />
                     </div>
 
+                    {errors.map(error => (
+                        <AlertMsg key={error} text={error} type="error" />
+                    ))}
 
                     <div className={styles.submit}>
                         <Button text="Post" type="submit" />
