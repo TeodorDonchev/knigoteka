@@ -27,7 +27,7 @@ class ProfilePage extends Component {
         });
     }
 
-    AnyBooks = () => {
+    renderBooks = () => {
         if (this.state.books.length === 0) {
             return (
                 <AlertMsg text="There aren't any posted books by you. You can do post now :)" type="no-data"/>
@@ -69,10 +69,8 @@ class ProfilePage extends Component {
                     <h1>{username}</h1>
                     <p className={styles.title}>Books Posted: {booksLength}</p>
                     <p className={styles.title}>Likes Aquired: {likes}</p>
-                    <p><button className={styles['card-button']}>Change username</button></p>
-                    <p><button className={styles['card-button']}>Change password</button></p>
                 </div>
-                {this.AnyBooks()}
+                {this.renderBooks()}
 
             </PageLayout >
         )

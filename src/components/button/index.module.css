@@ -33,3 +33,7 @@
     background-color: #404040;
     color: white;
 }
+
+.detail-button:focus, .submit-button:focus{
+    outline: none;
+}
