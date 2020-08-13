@@ -98,7 +98,7 @@ class BookDetailsPage extends Component {
     }
 
     edit = () => {
-
+        this.props.history.push(`/edit-book/${this.props.match.params.id}`)
     }
 
     delete = () => {
