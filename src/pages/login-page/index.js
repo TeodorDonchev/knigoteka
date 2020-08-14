@@ -6,6 +6,8 @@ import Button from '../../components/button';
 import AlertMsg from '../../components/alert-msg';
 import styles from './index.module.css';
 import UserContext from '../../Context';
+import { withRouter } from 'react-router-dom';
+
 
 class LoginPage extends Component {
 
@@ -59,7 +61,6 @@ class LoginPage extends Component {
         } = this.state;
 
         const hasErrors = this.validate();
-        console.log(hasErrors);
 
         if (hasErrors) {
             return
@@ -142,4 +143,4 @@ class LoginPage extends Component {
     }
 }
 
-export default LoginPage;
+export default withRouter(LoginPage);

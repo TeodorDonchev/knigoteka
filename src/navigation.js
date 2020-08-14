@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { useContext } from 'react';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import HomePage from './pages/home-page/';
 import AllBooksPage from './pages/all-books-page';
@@ -12,25 +12,34 @@ import PostBookPage from './pages/post-book-page';
 import BookDetailsPage from './pages/book-details-page';
 import EditBookPage from './pages/edit-book-page';
 
-class Navigation extends Component {
-    static contextType = UserContext;
-
-    render() {
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route path="/" exact component={HomePage} />
-                    <Route path="/all-books" component={AllBooksPage} />
-                    <Route path="/register" component={RegisterPage} />
-                    <Route path="/login" component={LoginPage} />
-                    <Route path="/profile/:id" component={ProfilePage} />
-                    <Route path="/post-book" component={PostBookPage} />
-                    <Route path="/edit-book/:id" component={EditBookPage} />
-                    <Route path="/book-details/:id" component={BookDetailsPage} />
-                </Switch>
-            </BrowserRouter>
-        );
-    }
+const Navigation = () => {
+    const context = useContext(UserContext);
+    const loggedIn = context.user && context.logged;
+    console.log(context);
+    console.log(loggedIn);
+    return (
+        <Switch>
+           <Route path="/" exact component={HomePage} />
+            <Route path="/all-books" component={AllBooksPage} />
+            <Route path="/book-details/:id" component={BookDetailsPage} />
+            <Route path="/register">
+                {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
+            </Route>
+            <Route path="/login">
+                {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
+            </Route>
+            <Route path="/profile/:id" >
+                {loggedIn ? (<ProfilePage />) : (<Redirect to="/login" />)}
+            </Route>
+            <Route path="/post-book">
+                {loggedIn ? (<PostBookPage />) : (<Redirect to="/login" />)}
+            </Route>
+            <Route path="/edit-book/:id">
+                {loggedIn ? (<EditBookPage />) : (<Redirect to="/login" />)}
+            </Route>
+            <Route path="*" component={HomePage} />
+        </Switch>
+    );
 }
 
 export default Navigation;

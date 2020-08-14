@@ -24,13 +24,17 @@ const EditBookPage = () => {
     const getBook = useCallback(async () => {
         const id = params.id;
         const response = await fetch(`http://localhost:9999/api/book/details/?id=${id}`);
+        if (response.status === 500) {
+            history.push('/');
+        }
         const book = await response.json();
+
         setTitle(book.title);
         setAuthor(book.author);
         setGenre(book.genre);
         setOpinion(book.opinion);
         setImageUrl(book.imageUrl);
-    }, [params.id]);
+    }, [params.id, history]);
 
     const onSubmit = (e) => {
         e.preventDefault();
