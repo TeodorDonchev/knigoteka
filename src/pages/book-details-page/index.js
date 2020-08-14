@@ -19,6 +19,7 @@ class BookDetailsPage extends Component {
             opinion: '',
             imageUrl: '',
             publishedBy: '',
+            deleteClick: false,
             likes: []
         }
     }
@@ -33,13 +34,13 @@ class BookDetailsPage extends Component {
         } = this.context.user;
 
         let likedAlready = false;
-        
+
         likes.forEach(like => {
             if (like.username === username) {
                 likedAlready = true;
             }
         })
-        
+
         return likedAlready;
     }
 
@@ -102,12 +103,32 @@ class BookDetailsPage extends Component {
     }
 
     delete = () => {
+        this.setState({
+            deleteClick: true
+        });
+    }
 
+    deleteConfirmed = () => {
+        const id = this.props.match.params.id;;
+        fetch(`http://localhost:9999/api/book/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Auth': getCookie('x-auth-token')
+            }
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+           if(result) {
+               this.props.history.push('/all-books');
+           }
+        })
     }
 
     renderButtons() {
         const {
-            publishedBy
+            publishedBy,
+            deleteClick
         } = this.state;
 
         if (this.context.logged) {
@@ -134,7 +155,11 @@ class BookDetailsPage extends Component {
             return (
                 <div className={styles['button-container']}>
                     <Button text="Edit" onClick={this.edit} type="detail" />
-                    <Button text="Delete" onClick={this.delete} type="detail" />
+                    {deleteClick
+                        ?
+                        <Button text="Click again" onClick={this.deleteConfirmed} type="detail" />
+                        :
+                        <Button text="Delete" onClick={this.delete} type="detail" />}
                 </div>
             );
 
