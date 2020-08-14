@@ -5,7 +5,6 @@ import PageLayout from '../../components/page-layout'
 import UserContext from '../../Context'
 import AlertMsg from '../../components/alert-msg';
 import styles from './index.module.css';
-import booksImg from '../../components/images/aboutBooks.png';
 
 class HomePage extends Component {
   static contextType = UserContext;
@@ -65,14 +64,16 @@ class HomePage extends Component {
         <PageTitle text="Most Liked Books" />
         {this.renderBooks()}
         <PageTitle text="About" />
-        <div className={styles.about}>
-          <img className={styles.bookImg} src={booksImg} alt="books" />
-          <h4 >
-            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-        </h4>
+        <div className={styles['about-container']}>
+          <div className={styles['about-text']}>
+            Knigoteka is a web application where you can learn out about other people's
+            thoughts about your favourite books or discover new ones. You can also help out
+            other people by posting your favourite books and your opinion on them.
+            In order to post a book, you will need to create or login to your account.
+            When you are in your account, you can keep track of the books you've posted and the
+            amount of likes you have collected. The books with the most likes are listed first and the top
+            3 are featured on the home page. So keep on reading and posting interesting books :)
+       </div>
         </div>
       </PageLayout>
     );
