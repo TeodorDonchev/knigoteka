@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Book from '../../components/book';
 import PageTitle from '../../components/title';
-import About from '../../components/about';
 import PageLayout from '../../components/page-layout'
 import UserContext from '../../Context'
 import AlertMsg from '../../components/alert-msg';
+import styles from './index.module.css';
+import booksImg from '../../components/images/aboutBooks.png';
 
 class HomePage extends Component {
   static contextType = UserContext;
@@ -34,7 +35,7 @@ class HomePage extends Component {
 
     if (books.length === 0) {
       return (
-        <AlertMsg text="Sorry, there aren't any posted books at the moment" type="no-data"/>
+        <AlertMsg text="Sorry, there aren't any posted books at the moment" type="no-data" />
       );
     }
 
@@ -64,10 +65,15 @@ class HomePage extends Component {
         <PageTitle text="Most Liked Books" />
         {this.renderBooks()}
         <PageTitle text="About" />
-        <About text="Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-    Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-      Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
-     Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others."/>
+        <div className={styles.about}>
+          <img className={styles.bookImg} src={booksImg} alt="books" />
+          <h4 >
+            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
+            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
+            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
+            Knigoteka is a place where you can recommend the books that you have read. When you have an account we will provide you with the abillity to share thoughts to the books you've added and like others.
+        </h4>
+        </div>
       </PageLayout>
     );
   }

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Book from '../../components/book';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
-import SearchMenu from '../../components/search-menu';
 import styles from './index.module.css';
 import AlertMsg from '../../components/alert-msg';
 
@@ -60,7 +59,6 @@ class AllBooksPage extends Component {
 
         return (
             <PageLayout footer={footerType}>
-                <SearchMenu />
                 <PageTitle text="All Posted Books" />
                 {this.renderBooks()}
             </PageLayout>
