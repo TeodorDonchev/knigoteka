@@ -6,6 +6,8 @@ import Button from '../../components/button';
 import UserContext from '../../Context';
 import styles from './index.module.css';
 import AlertMsg from '../../components/alert-msg';
+import { withRouter } from 'react-router-dom';
+
 
 class RegisterPage extends Component {
     static contextType = UserContext;
@@ -158,4 +160,4 @@ class RegisterPage extends Component {
 
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

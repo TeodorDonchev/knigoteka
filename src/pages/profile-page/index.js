@@ -5,6 +5,8 @@ import UserContext from '../../Context';
 import Book from '../../components/book';
 import styles from './index.module.css';
 import AlertMsg from '../../components/alert-msg';
+import { withRouter } from 'react-router-dom';
+
 
 class ProfilePage extends Component {
     static contextType = UserContext;
@@ -77,4 +79,4 @@ class ProfilePage extends Component {
     }
 }
 
-export default ProfilePage;
+export default withRouter(ProfilePage);
