@@ -1,3 +1,41 @@
+### Description
+Knigoteka is a web application where you can learn about other people's thoughts about your favourite books or discover new ones. You can also help out other people by posting your favourite books and your opinion on them. In order to post a book, you will need to create or login to your account. When you are in your account, you can keep track of the books you've posted and the amount of likes you have collected. You can also delete and edit your posted books and like others people's posted books. The books with the most likes are listed first and the top 3 are featured on the home page. (This is project is made for a ReactJS Course for Software University 2020)
+
+### Routes
+Guest Pages: 
+- / - Home Page
+- /all-books - All Books Page
+- /book-details/:id - Book Details Page
+- /register - Register Page
+- /login - Login Page
+
+User Pages: 
+- /post-book - Post Book Page
+- /edit-book/:id - Edit Book Page
+- /profile/:id - Profile Page
+- /logout - Redirects to Home Page
+
+### Rest API 
+In the server directory you can run `npm start` to run the rest api.
+
+Functionalities: 
+
+Book:
+-  GET - get all books - /api/book
+-  GET - book details -  /api/book/details/:id
+-  PUT - (Auth) like book - /api/book/like/:id
+-  PUT - (Auth) edit book - /api/book/:id
+-  POST - (Auth) post book - /api/book
+
+User:
+-  GET - get user - /api/user?id=:id
+-  POST - register user - /api/user/register
+-  POST - login user - /api/user/login
+-  POST - logout user - /api/user/logout
+
+
+This project connects with the Cloudinary API for storing the images on their server.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -14,55 +52,11 @@ You will also see any lint errors in the console.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
 ### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
 ### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
