@@ -8,6 +8,7 @@ import styles from './index.module.css';
 import UserContext from '../../Context';
 import getCookie from '../../utils/cookie-parser';
 import validateBook from '../../utils/book-validator';
+import { withRouter } from 'react-router-dom';
 
 class PostBookPage extends Component {
     static contextType = UserContext;
@@ -201,4 +202,4 @@ class PostBookPage extends Component {
     }
 }
 
-export default PostBookPage;
+export default withRouter(PostBookPage);

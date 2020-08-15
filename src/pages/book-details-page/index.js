@@ -60,7 +60,7 @@ class BookDetailsPage extends Component {
 
         if (likes.length === 0) {
             return (
-                <p className={styles.likes}>no one yet.</p>
+                <div className={styles.likes}>no one yet.</div>
             )
         }
 
@@ -194,9 +194,9 @@ class BookDetailsPage extends Component {
 
                     <div className={styles['data-container']}>
                         <h1>{title}</h1>
-                        <p className={styles.likes}>Liked by: {this.renderLikes()}</p>
+                        <div className={styles.likes}>Liked by: {this.renderLikes()}</div>
                         <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
-                        <div className={styles.field}>Posted By: {publishedBy.username}</div>
+                        <div className={styles.field}>Posted by: {publishedBy.username}</div>
                         <div className={styles.field}>Genre: {genre}</div>
                         <div className={styles.field}>Author: {author}</div>
                         <div className={styles['opinion-title']}>{publishedBy.username}'s opinion on the book:</div>
