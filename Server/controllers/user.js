@@ -22,9 +22,8 @@ module.exports = {
             const { username, password } = req.body;
             models.User.create({ username, password })
                 .then((createdUser) => {
-
                     const token = utils.jwt.createToken({ id: createdUser._id });
-                    res.header(config.authCookieName, token).send(createdUser);
+                    res.header('auth', token).send(createdUser);
                 })
                 .catch((e) => {
                     if (e.code === 11000) {

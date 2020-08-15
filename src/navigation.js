@@ -15,8 +15,7 @@ import EditBookPage from './pages/edit-book-page';
 const Navigation = () => {
     const context = useContext(UserContext);
     const loggedIn = context.user && context.logged;
-    console.log(context);
-    console.log(loggedIn);
+    
     return (
         <Switch>
            <Route path="/" exact component={HomePage} />

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import LinkPath from '../link-path';
 import styles from './index.module.css';
 import logo from '../images/logo-text.png';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import getLinks from '../../utils/nav-links'
 import UserContext from '../../Context'
 
@@ -11,6 +11,7 @@ class Header extends Component {
 
     logout = () => {
         this.context.logout();
+        this.props.history.push('/')
     }
 
     render() {
@@ -53,4 +54,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);
