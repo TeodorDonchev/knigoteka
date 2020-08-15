@@ -66,7 +66,7 @@ class HomePage extends Component {
         <PageTitle text="About" />
         <div className={styles['about-container']}>
           <div className={styles['about-text']}>
-            Knigoteka is a web application where you can learn out about other people's
+            Knigoteka is a web application where you can learn about other people's
             thoughts about your favourite books or discover new ones. You can also help out
             other people by posting your favourite books and your opinion on them.
             In order to post a book, you will need to create or login to your account.
